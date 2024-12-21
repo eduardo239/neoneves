@@ -1,0 +1,41 @@
+/* .place {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 1rem 0.75rem;
+  border-bottom: 3px solid rgba(111, 71, 255, 0.9);
+  box-shadow: 2px 2px 12px rgba(164, 138, 255, 0.2);
+}
+
+.place p,
+.place h3 {
+  text-align: center;
+}
+.place p {
+  font-size: 0.65rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.place.active {
+  background-color: rgba(111, 71, 255, 0.9);
+  border-bottom: 3px solid rgba(71, 255, 80, 0.9);
+}
+.place.visited {
+  background-color: rgba(164, 138, 255, 0.1);
+}
+.place-type.enemy {
+  color: rgba(255, 114, 114, 0.9);
+}
+.place-type.empty {
+  color: rgba(226, 226, 226, 0.9);
+}
+.place-type.treasure {
+  color: rgba(255, 255, 126, 0.9);
+}
+.place-type.boss {
+  color: rgba(255, 125, 255, 0.9);
+} */

@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.top {
+  text-align: center;
+}
+
+.middle {
+  flex: 1;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  padding: 0.25rem;
+}
+
+.bottom {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.h-100 {
+  height: 100%;
+}
