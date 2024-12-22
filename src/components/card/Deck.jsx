@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { cardsDB } from "../../db/Cards";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import calculateSelectedCards from "./calculate";
 
 export default function Deck({ cards }) {
   const [selectedCards, setSelectedCards] = useState([]);
@@ -14,6 +15,10 @@ export default function Deck({ cards }) {
       }
     });
   };
+
+  useEffect(() => {
+    calculateSelectedCards(selectedCards);
+  }, [selectedCards]);
 
   const loopForCards = () => {
     return cards.map((c, i) => {
@@ -48,7 +53,14 @@ export default function Deck({ cards }) {
   };
 
   if (cards && cards.length > 0)
-    return <div className="deck ">{loopForCards()}</div>;
+    return (
+      <>
+        <div className="deck ">{loopForCards()}</div>{" "}
+        <div className="center">
+          <span>Total: {100}</span>
+        </div>
+      </>
+    );
   else return <div>Deck is empty</div>;
 }
 

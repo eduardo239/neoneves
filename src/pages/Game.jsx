@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGameContext } from "../context/GameContext";
 
 import { typeDB } from "../db/Type";
@@ -13,15 +13,15 @@ import Store from "../components/map/Store";
 import Treasure from "../components/map/Treasure";
 import StatusBar from "../components/map/StatusBar";
 import Inventory from "../components/map/Inventory";
+import ButtonGame from "../components/ui/ButtonGame";
 
 export default function Game() {
   const {
-    hero,
     message,
     setMessage,
     map,
     setMap,
-    dice,
+
     setDice,
     isFighting,
     setActualPlace,
@@ -33,12 +33,12 @@ export default function Game() {
     setIsTreasure,
     isInventory,
     setIsInventory,
+
+    setIsPlaying,
   } = useGameContext();
 
-  const [isPlaying, setIsPlaying] = useState(false);
-
   useEffect(() => {
-    generateRandomMap(41);
+    generateRandomMap(31);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -104,6 +104,16 @@ export default function Game() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualPlace, map]);
 
+  const openInventory = () => {
+    setIsInventory(!isInventory);
+    setIsShopping(false);
+  };
+
+  const openStore = () => {
+    setIsShopping(!isShopping);
+    setIsInventory(false);
+  };
+
   return (
     <div className="container">
       {message && (
@@ -137,33 +147,9 @@ export default function Game() {
         <StatusBar />
 
         <div className="footer-buttons gap-25">
-          <button
-            className={isPlaying ? "active" : ""}
-            onClick={play}
-            disabled={isFighting || !hero}
-          >
-            Play dice={dice} # actual={actualPlace}
-          </button>
-          <button
-            className={isInventory ? "active" : ""}
-            disabled={isTreasure || !hero}
-            onClick={() => {
-              setIsInventory(!isInventory);
-              setIsShopping(false);
-            }}
-          >
-            Inventory
-          </button>
-          <button
-            className={isShopping ? "active" : ""}
-            disabled={isTreasure || isFighting || !hero}
-            onClick={() => {
-              setIsShopping(!isShopping);
-              setIsInventory(false);
-            }}
-          >
-            Store
-          </button>
+          <ButtonGame onClick={play} type="play" />
+          <ButtonGame onClick={openInventory} type="inventory" />
+          <ButtonGame onClick={openStore} type="store" />
         </div>
       </div>
     </div>

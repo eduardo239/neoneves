@@ -13,7 +13,7 @@ export default function Home() {
       </div>
 
       <div className="middle">
-        <div className="flex flex-center h-100">
+        <div className="h-100 flex-center-center flex-column">
           <h3>Game RPG</h3>
         </div>
       </div>

@@ -38,17 +38,6 @@ export default function CardSimple({ item, mode }) {
         break;
     }
   };
-  /**
-   * {
-    "name": "Potion Big",
-    "src": "/src/assets/items/po2.jpg",
-    "effect": "+50 HP",
-    "value": 50,
-    "price": 20,
-    "type": "item",
-    "id": "5cc1eb8e-3d0a-47f8-9368-4c764ba2a4cd"
-    }
-   */
 
   const handleBuy = () => {
     const itemPrice = item.price;

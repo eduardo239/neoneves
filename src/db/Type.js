@@ -9,14 +9,14 @@ export const typeDB = [
   },
   {
     id: 3,
-    name: "treasure",
+    name: "enemy",
   },
   {
     id: 4,
-    name: "treasure",
+    name: "enemy",
   },
   {
     id: 5,
-    name: "treasure",
+    name: "enemy",
   },
 ];

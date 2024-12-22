@@ -23,6 +23,7 @@ export const GameProvider = ({ children }) => {
   const [isShopping, setIsShopping] = useState(false);
   const [isTreasure, setIsTreasure] = useState(false);
   const [isInventory, setIsInventory] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   // map
   const [map, setMap] = useState([]);
   const [actualPlace, setActualPlace] = useState(0);
@@ -76,6 +77,8 @@ export const GameProvider = ({ children }) => {
         setInventory,
         isInventory,
         setIsInventory,
+        isPlaying,
+        setIsPlaying,
       }}
     >
       {children}
