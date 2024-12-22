@@ -18,6 +18,10 @@
 .card.selected {
   border: 3px solid var(--color-primary);
 }
+.card.disabled {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
 
 .card:hover {
   cursor: pointer;

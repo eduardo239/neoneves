@@ -18,7 +18,6 @@ export default function Inventory() {
   if (inventory.length > 0)
     return (
       <div className="h-100 flex-center-center flex-column">
-        <h2 className="text-center">Inventory</h2>
         <div className="flex gap-25">{loopForItems()}</div>
       </div>
     );

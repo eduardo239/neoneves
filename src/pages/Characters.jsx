@@ -30,7 +30,7 @@ export default function Characters() {
       </div>
 
       <div className="middle">
-        <div className="h-100 flex-center-center flex-column">
+        <div className="centered">
           <h2>Heroes</h2>
           <div className="flex gap-25">{loopForHeroes()}</div>
         </div>

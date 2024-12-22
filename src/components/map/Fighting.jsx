@@ -33,8 +33,6 @@ export default function Fighting() {
       const heroCards = randomCards.slice(0, totalCards / 2);
       const enemyCards = randomCards.slice(totalCards / 2, totalCards);
 
-      const oc = sortingCards(heroCards);
-      console.log(oc);
       setHeroCards(sortingCards(heroCards));
       setEnemyCards(sortingCards(enemyCards));
     }
@@ -46,7 +44,7 @@ export default function Fighting() {
         {hero ? <CardFull h={hero} /> : "No hero selected"}
       </div>
       <div className="deck-grid">
-        <Deck cards={heroCards} />
+        <Deck cards={heroCards} isFront={true} />
         <div className="footer-buttons gap-25">
           <ButtonFight onClick={hit} type="hit" />
           <ButtonFight onClick={magic} type="magic" />
@@ -61,7 +59,11 @@ export default function Fighting() {
           {hero ? <CardFull h={hero} /> : "No hero selected"}
         </div>
         <div className="deck-grid">
-          {isInventory ? <Inventory /> : <Deck cards={enemyCards} />}
+          {isInventory ? (
+            <Inventory />
+          ) : (
+            <Deck cards={enemyCards} isFront={false} />
+          )}
         </div>
       </>
     </div>

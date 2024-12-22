@@ -1,15 +1,26 @@
-import PropTypes from "prop-types";
-import { cardsDB } from "../../db/Cards";
 import { useEffect, useState } from "react";
+
+import PropTypes from "prop-types";
+import cardBack from "../../assets/cards/bg1.jpg";
 import calculateSelectedCards from "./calculate";
 
-export default function Deck({ cards }) {
+export default function Deck({ cards, isFront = true }) {
   const [selectedCards, setSelectedCards] = useState([]);
+  const [canSelect, setCanSelect] = useState(true);
 
-  const handleCardClick = (card) => {
+  useEffect(() => {
+    if (selectedCards.length <= 3) {
+      setCanSelect(true);
+    } else {
+      setCanSelect(false);
+    }
+  }, [selectedCards]);
+
+  const handleSelectCard = (card) => {
+    if (!canSelect && !selectedCards.includes(card)) return;
     setSelectedCards((prevSelectedCards) => {
       if (prevSelectedCards.includes(card)) {
-        return prevSelectedCards.filter((c) => c !== card);
+        return prevSelectedCards.filter((_card) => _card !== card);
       } else {
         return [...prevSelectedCards, card];
       }
@@ -21,29 +32,34 @@ export default function Deck({ cards }) {
   }, [selectedCards]);
 
   const loopForCards = () => {
-    return cards.map((c, i) => {
+    return cards.map((_card, i) => {
       return (
         <div key={i}>
           <div
-            className={`card ${selectedCards.includes(c) ? "selected" : ""}`}
-            onClick={() => handleCardClick(c)}
+            className={`card ${
+              !canSelect && !selectedCards.includes(_card) ? "disabled" : ""
+            } ${selectedCards.includes(_card) ? "selected" : ""}`}
+            onClick={() => handleSelectCard(_card)}
           >
-            <img src={cardsDB[0].src} alt="cards deck pick one" />
+            <img
+              src={isFront ? _card.src : cardBack}
+              alt="cards deck pick one"
+            />
             <p style={{ textAlign: "center" }}>
               <span
                 style={
-                  c.suit === "hearts"
+                  _card.suit === "hearts"
                     ? { color: "orange" }
-                    : c.suit === "spades"
+                    : _card.suit === "spades"
                     ? { color: "yellow" }
-                    : c.suit === "diamonds"
+                    : _card.suit === "diamonds"
                     ? { color: "lightgreen" }
-                    : c.suit === "clubs"
+                    : _card.suit === "clubs"
                     ? { color: "lightblue" }
                     : {}
                 }
               >
-                {c.suit}#{c.value}
+                {_card.suit}#{_card.value}
               </span>
             </p>
           </div>
@@ -66,4 +82,5 @@ export default function Deck({ cards }) {
 
 Deck.propTypes = {
   cards: PropTypes.array.isRequired,
+  isFront: PropTypes.bool,
 };

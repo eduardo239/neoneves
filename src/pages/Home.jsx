@@ -13,7 +13,7 @@ export default function Home() {
       </div>
 
       <div className="middle">
-        <div className="h-100 flex-center-center flex-column">
+        <div className="centered">
           <h3>Game RPG</h3>
         </div>
       </div>

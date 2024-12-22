@@ -1,11 +1,11 @@
-import player1 from "../assets/p1.jpg";
-import player2 from "../assets/p2.jpg";
-import player3 from "../assets/p3.jpg";
+import hero1 from "../assets/heroes/h1.jpg";
+import hero2 from "../assets/heroes/h2.jpg";
+import hero3 from "../assets/heroes/h3.jpg";
 
 export const heroesDB = [
   {
     name: "Louise",
-    src: player1,
+    src: hero1,
     hp: 90,
     mp: 70,
     atk: 17,
@@ -15,7 +15,7 @@ export const heroesDB = [
   },
   {
     name: "Luna",
-    src: player2,
+    src: hero2,
     hp: 100,
     mp: 50,
     atk: 12,
@@ -24,8 +24,8 @@ export const heroesDB = [
     type: "hero",
   },
   {
-    name: "George",
-    src: player3,
+    name: "James",
+    src: hero3,
     hp: 15,
     mp: 15,
     atk: 3,
