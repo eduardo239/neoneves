@@ -1,30 +1,30 @@
-export const dbItems = [
+import p1 from "../assets/items/po1.jpg";
+import p2 from "../assets/items/po2.jpg";
+
+export const itemsDB = [
   {
-    id: 1,
     name: "Potion Small",
-    src: "https://i.ibb.co/1s2T2gk/louise.png",
+    src: p1,
     effect: "+30 HP",
     value: 30,
     price: 10,
-    type: "item",
+    type: "cure",
   },
   {
-    id: 2,
     name: "Potion Big",
-    src: "https://i.ibb.co/1s2T2gk/louise.png",
+    src: p2,
     effect: "+50 HP",
     value: 50,
     price: 20,
-    type: "item",
+    type: "cure",
   },
 
   {
-    id: 3,
     name: "Mana Big",
-    src: "https://i.ibb.co/1s2T2gk/louise.png",
+    src: p1,
     effect: "+50 MP",
     value: 50,
     price: 20,
-    type: "item",
+    type: "mana",
   },
 ];

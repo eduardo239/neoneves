@@ -1,6 +1,6 @@
-import { dbCards } from "../db/Cards";
+import { cardsDB } from "../db/Cards";
 import { dbEnemies } from "../db/Enemy";
-import { dbItems } from "../db/Item";
+import { itemsDB } from "../db/Item";
 import { typeDB } from "../db/Type";
 
 const _boss = [{ name: "boss" }];
@@ -14,11 +14,11 @@ export const selectRandomItemsFromList2 = (quantity = 3, list = []) => {
   return _randomItems;
 };
 
-export const getRandomCards = (qty = 9) => {
-  // get 9 random cards from dbCards
+export const getRandomCards2 = (qty = 9) => {
+  // get 9 random cards from cardsDB
   let _randomCards = [];
   for (let i = 0; i < qty; i++) {
-    let _randomCard = dbCards[Math.floor(Math.random() * dbCards.length)];
+    let _randomCard = cardsDB[Math.floor(Math.random() * cardsDB.length)];
     _randomCards.push(_randomCard);
   }
   return _randomCards;
@@ -29,7 +29,6 @@ export const rollDice = (setDice, setActualPlace, actualPlace, map) => {
   setDice(dice);
 
   if (actualPlace + dice >= map.length) {
-    console.log("End of the game");
     setActualPlace(map.length - 1);
     return;
   }
@@ -48,7 +47,7 @@ export const generateMap = (mapSize = 20, setMap) => {
 };
 
 export const getTreasure = (setInventory, inventory) => {
-  let _randomItem = dbItems[Math.floor(Math.random() * dbItems.length)];
+  let _randomItem = itemsDB[Math.floor(Math.random() * itemsDB.length)];
   setInventory([...inventory, _randomItem]);
 };
 
@@ -93,10 +92,10 @@ export const checkPlace = (
         _queue.push(_enemy);
 
         // get 7 random cards
-        _enRandomCards = getRandomCards(4);
+        _enRandomCards = getRandomCards2(4);
         setEnemyCards(_enRandomCards);
         //
-        _heRandomCards = getRandomCards(4);
+        _heRandomCards = getRandomCards2(4);
         setHeroCards(_heRandomCards);
 
         //
@@ -104,13 +103,13 @@ export const checkPlace = (
 
         break;
       case "treasure":
-        console.log("treasure");
+        //
         break;
       case "empty":
-        console.log("empty");
+        //
         break;
       case "boss":
-        console.log("boss");
+        //
         break;
     }
   }

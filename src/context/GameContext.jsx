@@ -7,6 +7,8 @@ const GameContext = createContext();
 export const GameProvider = ({ children }) => {
   const [hero, setHero] = useState(null);
   const [enemy, setEnemy] = useState([]);
+  // inventory
+  const [inventory, setInventory] = useState([]);
   // cards
   const [enemyCards, setEnemyCards] = useState([]);
   const [heroCards, setHeroCards] = useState([]);
@@ -20,6 +22,7 @@ export const GameProvider = ({ children }) => {
   const [isFighting, setIsFighting] = useState(false);
   const [isShopping, setIsShopping] = useState(false);
   const [isTreasure, setIsTreasure] = useState(false);
+  const [isInventory, setIsInventory] = useState(false);
   // map
   const [map, setMap] = useState([]);
   const [actualPlace, setActualPlace] = useState(0);
@@ -32,7 +35,7 @@ export const GameProvider = ({ children }) => {
     if (message) {
       setTimeout(() => {
         setMessage("");
-      }, 3000);
+      }, 1000);
     }
   }, [message]);
 
@@ -69,6 +72,10 @@ export const GameProvider = ({ children }) => {
         setDice,
         isTreasure,
         setIsTreasure,
+        inventory,
+        setInventory,
+        isInventory,
+        setIsInventory,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGameContext } from "../context/GameContext";
 
 import { typeDB } from "../db/Type";
@@ -11,9 +11,12 @@ import Fighting from "../components/map/Fighting";
 import Map from "../components/map/Map";
 import Store from "../components/map/Store";
 import Treasure from "../components/map/Treasure";
+import StatusBar from "../components/map/StatusBar";
+import Inventory from "../components/map/Inventory";
 
 export default function Game() {
   const {
+    hero,
     message,
     setMessage,
     map,
@@ -28,7 +31,11 @@ export default function Game() {
     setIsShopping,
     isTreasure,
     setIsTreasure,
+    isInventory,
+    setIsInventory,
   } = useGameContext();
+
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     generateRandomMap(41);
@@ -36,52 +43,58 @@ export default function Game() {
   }, []);
 
   const generateRandomMap = (mapSize = 20) => {
-    const _map = [];
+    const placeList = [];
+
     for (let i = 0; i < mapSize; i++) {
       let _placeType = typeDB[Math.floor(Math.random() * typeDB.length)];
-      _map.push(_placeType);
+      placeList.push(_placeType);
     }
-    _map.unshift(typeDB[0]);
-    _map.push(bossDB[0]);
-    setMap(_map);
+    placeList.unshift(typeDB[0]);
+    placeList.push(bossDB[0]);
+    setMap(placeList);
   };
 
   const play = () => {
+    setIsPlaying(true);
     const randomDice = generateRandomNumber(1, 6);
     setDice(randomDice);
     setActualPlace(actualPlace + randomDice);
+    setTimeout(() => {
+      setIsPlaying(false);
+    }, 1000);
   };
 
   const checkPlace = (place) => {
     switch (place) {
       case "empty":
-        console.log("empty");
+        setMessage("");
         break;
-      case "shop":
-        console.log("shop");
-        break;
+      //
       case "treasure":
-        console.log("treasure");
-
+        setIsShopping(false);
+        setIsFighting(false);
+        //
         setMessage("You found a treasure");
         setTimeout(() => {
           setIsTreasure(true);
         }, 1000);
         break;
+      //
       case "enemy":
-        console.log("enemy");
-
+        setIsShopping(false);
+        setIsTreasure(false);
+        //
         setMessage("You are fighting");
         setTimeout(() => {
           setIsFighting(true);
         }, 1000);
-
         break;
+      //
       case "boss":
-        console.log("boss");
+        console.info("boss");
         break;
       default:
-        console.log("default");
+        console.info("default");
         break;
     }
   };
@@ -113,23 +126,44 @@ export default function Game() {
           <Store />
         ) : isTreasure ? (
           <Treasure />
+        ) : isInventory ? (
+          <Inventory />
         ) : (
           <Map />
         )}
       </div>
 
       <div className="bottom">
-        <div className="footer-buttons">
-          <button onClick={play} disabled={isFighting}>
+        <StatusBar />
+
+        <div className="footer-buttons gap-25">
+          <button
+            className={isPlaying ? "active" : ""}
+            onClick={play}
+            disabled={isFighting || !hero}
+          >
             Play dice={dice} # actual={actualPlace}
           </button>
           <button
-            onClick={() => setIsShopping(!isShopping)}
-            disabled={isFighting}
+            className={isInventory ? "active" : ""}
+            disabled={isTreasure || !hero}
+            onClick={() => {
+              setIsInventory(!isInventory);
+              setIsShopping(false);
+            }}
+          >
+            Inventory
+          </button>
+          <button
+            className={isShopping ? "active" : ""}
+            disabled={isTreasure || isFighting || !hero}
+            onClick={() => {
+              setIsShopping(!isShopping);
+              setIsInventory(false);
+            }}
           >
             Store
           </button>
-          <button>Exit</button>
         </div>
       </div>
     </div>

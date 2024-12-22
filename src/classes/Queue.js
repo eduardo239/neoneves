@@ -36,7 +36,7 @@ class Queue {
   }
 
   print() {
-    console.log(this.items);
+    console.info(this.items);
   }
 }
 

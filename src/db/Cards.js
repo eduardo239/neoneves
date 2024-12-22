@@ -1,7 +1,7 @@
 import player1 from "../assets/c1.jpeg";
 import player2 from "../assets/c1.jpeg";
 
-export const dbCards = [
+export const cardsDB = [
   { id: 0, suit: "spades", value: 0, src: player1 },
   { id: 1, suit: "spades", value: 1, src: player1 },
   { id: 2, suit: "spades", value: 2, src: player1 },

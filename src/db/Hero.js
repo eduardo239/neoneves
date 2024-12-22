@@ -4,7 +4,6 @@ import player3 from "../assets/p3.jpg";
 
 export const heroesDB = [
   {
-    id: 1,
     name: "Louise",
     src: player1,
     hp: 90,
@@ -15,7 +14,6 @@ export const heroesDB = [
     type: "hero",
   },
   {
-    id: 2,
     name: "Luna",
     src: player2,
     hp: 100,
@@ -26,7 +24,6 @@ export const heroesDB = [
     type: "hero",
   },
   {
-    id: 3,
     name: "George",
     src: player3,
     hp: 15,

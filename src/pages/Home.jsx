@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="container">
       <div className="top">
@@ -19,9 +20,9 @@ export default function Home() {
 
       <div className="bottom">
         <div className="footer-buttons">
-          <button>test</button>
-          <button>Start</button>
-          <button>test</button>
+          <button>XXX</button>
+          <button onClick={() => navigate("/character")}>Start</button>
+          <button>XXX</button>
         </div>
       </div>
     </div>
