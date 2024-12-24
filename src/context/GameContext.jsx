@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 
 import { createContext, useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const [hero, setHero] = useState(null);
-  const [enemy, setEnemy] = useState([]);
+  const [enemy, setEnemy] = useState(null);
   // inventory
   const [inventory, setInventory] = useState([]);
   // cards
@@ -15,6 +18,7 @@ export const GameProvider = ({ children }) => {
   // selected cards
   const [heroSelectedCards, setHeroSelectedCards] = useState([]);
   const [enemySelectedCards, setEnemySelectedCards] = useState([]);
+  const [handRanking, setHandRanking] = useState(null);
   // queue turn
   const [turn, setTurn] = useState(0);
   const [fightQueue, setFightQueue] = useState([]);
@@ -31,6 +35,29 @@ export const GameProvider = ({ children }) => {
 
   // information
   const [message, setMessage] = useState("");
+
+  const resetGame = () => {
+    setHero(null);
+    setEnemy(null);
+    setInventory([]);
+    setEnemyCards([]);
+    setHeroCards([]);
+    setHeroSelectedCards([]);
+    setEnemySelectedCards([]);
+    setHandRanking(null);
+    setTurn(0);
+    setFightQueue([]);
+    setIsFighting(false);
+    setIsShopping(false);
+    setIsTreasure(false);
+    setIsInventory(false);
+    setIsPlaying(false);
+    setMap([]);
+    setActualPlace(0);
+    setDice(0);
+
+    navigate("/character");
+  };
 
   useEffect(() => {
     if (message) {
@@ -79,6 +106,10 @@ export const GameProvider = ({ children }) => {
         setIsInventory,
         isPlaying,
         setIsPlaying,
+        handRanking,
+        setHandRanking,
+
+        resetGame,
       }}
     >
       {children}

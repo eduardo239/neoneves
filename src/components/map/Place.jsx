@@ -1,10 +1,6 @@
 import PropTypes from "prop-types";
-// import { useEffect } from "react";
-// import { useGameContext } from "../../context/GameContext";
 
 export default function Place({ index, place, actualPlace }) {
-  // const { setIsFighting, map } = useGameContext();
-
   return (
     <div
       key={index}
@@ -12,8 +8,20 @@ export default function Place({ index, place, actualPlace }) {
         actualPlace === index ? "active" : actualPlace > index ? "visited" : ""
       }`}
     >
-      <h3>{index}</h3>
-      <span>{place.name}</span>
+      <div
+        className={`place-content ${
+          place.name === "enemy"
+            ? "enemy"
+            : place.name === "treasure"
+            ? "treasure"
+            : place.name === "boss"
+            ? "boss"
+            : ""
+        }`}
+      >
+        <h3>{index}</h3>
+        <span>{place.name}</span>
+      </div>
     </div>
   );
 }

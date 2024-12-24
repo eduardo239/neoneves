@@ -1,15 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import TopMenu from "../components/ui/TopMenu";
 
 export default function Home() {
   const navigate = useNavigate();
   return (
     <div className="container">
       <div className="top">
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/character">Character</Link>
-          <Link to="/game">Game</Link>
-        </nav>
+        <TopMenu />
       </div>
 
       <div className="middle">
@@ -20,9 +17,7 @@ export default function Home() {
 
       <div className="bottom">
         <div className="footer-buttons">
-          <button>XXX</button>
           <button onClick={() => navigate("/character")}>Start</button>
-          <button>XXX</button>
         </div>
       </div>
     </div>

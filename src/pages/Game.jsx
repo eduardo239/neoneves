@@ -1,40 +1,28 @@
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useGameContext } from "../context/GameContext";
 
 import { typeDB } from "../db/Type";
 import { bossDB } from "../db/Boss";
 
-import { generateRandomNumber } from "../helper";
-
-import Fighting from "../components/map/Fighting";
-import Map from "../components/map/Map";
-import Store from "../components/map/Store";
-import Treasure from "../components/map/Treasure";
 import StatusBar from "../components/map/StatusBar";
-import Inventory from "../components/map/Inventory";
-import ButtonGame from "../components/ui/ButtonGame";
+
+import background from "../assets/bg/bg345.jpg";
+import TopMenu from "../components/ui/TopMenu";
+import GameMain from "../components/ui/GameMain";
+import GameMainMenu from "../components/ui/GameMainMenu";
+import Message from "../components/ui/Message";
 
 export default function Game() {
   const {
-    message,
     setMessage,
     map,
+    hero,
+    enemy,
     setMap,
-
-    setDice,
-    isFighting,
-    setActualPlace,
     actualPlace,
     setIsFighting,
-    isShopping,
     setIsShopping,
-    isTreasure,
     setIsTreasure,
-    isInventory,
-    setIsInventory,
-
-    setIsPlaying,
   } = useGameContext();
 
   useEffect(() => {
@@ -54,22 +42,8 @@ export default function Game() {
     setMap(placeList);
   };
 
-  const play = () => {
-    setIsPlaying(true);
-    const randomDice = generateRandomNumber(1, 6);
-    setDice(randomDice);
-    setActualPlace(actualPlace + randomDice);
-    setTimeout(() => {
-      setIsPlaying(false);
-    }, 1000);
-  };
-
   const checkPlace = (place) => {
     switch (place) {
-      case "empty":
-        setMessage("");
-        break;
-      //
       case "treasure":
         setIsShopping(false);
         setIsFighting(false);
@@ -94,7 +68,6 @@ export default function Game() {
         console.info("boss");
         break;
       default:
-        console.info("default");
         break;
     }
   };
@@ -104,53 +77,25 @@ export default function Game() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualPlace, map]);
 
-  const openInventory = () => {
-    setIsInventory(!isInventory);
-    setIsShopping(false);
-  };
-
-  const openStore = () => {
-    setIsShopping(!isShopping);
-    setIsInventory(false);
-  };
-
   return (
-    <div className="container">
-      {message && (
-        <div className="message">
-          <p>{message}</p>
-        </div>
-      )}
+    <div
+      className="container background"
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <Message />
       <div className="top">
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/character">Character</Link>
-          <Link to="/game">Game</Link>
-        </nav>
+        <TopMenu />
+
+        {hero && <StatusBar character={hero} />}
       </div>
 
       <div className="middle">
-        {isFighting ? (
-          <Fighting />
-        ) : isShopping ? (
-          <Store />
-        ) : isTreasure ? (
-          <Treasure />
-        ) : isInventory ? (
-          <Inventory />
-        ) : (
-          <Map />
-        )}
+        <GameMain />
       </div>
 
       <div className="bottom">
-        <StatusBar />
-
-        <div className="footer-buttons gap-25">
-          <ButtonGame onClick={play} type="play" />
-          <ButtonGame onClick={openInventory} type="inventory" />
-          <ButtonGame onClick={openStore} type="store" />
-        </div>
+        {enemy && <StatusBar character={enemy} />}
+        <GameMainMenu />
       </div>
     </div>
   );

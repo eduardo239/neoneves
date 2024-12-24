@@ -1,11 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { heroesDB } from "../db/Hero.js";
 import { v4 as uuidv4 } from "uuid";
 
 import CardSimple from "../components/card/CardSimple.jsx";
 import StatusBar from "../components/map/StatusBar.jsx";
+import TopMenu from "../components/ui/TopMenu.jsx";
+import { useGameContext } from "../context/GameContext.jsx";
 
 export default function Characters() {
+  const { hero } = useGameContext();
+
   const navigate = useNavigate();
 
   const loopForHeroes = () => {
@@ -22,11 +26,7 @@ export default function Characters() {
   return (
     <div className="container">
       <div className="top">
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/character">Character</Link>
-          <Link to="/game">Game</Link>
-        </nav>
+        <TopMenu />
       </div>
 
       <div className="middle">
@@ -37,10 +37,10 @@ export default function Characters() {
       </div>
 
       <div className="bottom">
-        <StatusBar />
+        {hero && <StatusBar character={hero} />}
+
         <div className="footer-buttons">
           <button onClick={() => navigate("/")}>Back</button>
-          <button>XXX</button>
           <button onClick={() => navigate("/game")}>Next</button>
         </div>
       </div>

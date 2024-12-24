@@ -26,7 +26,7 @@ export default function Store() {
   };
 
   return (
-    <div className="h-100 flex-center-center flex-column">
+    <div className="centered">
       <h2 className="text-center">Store</h2>
       <div className="flex gap-25">{loopForItems()}</div>
     </div>

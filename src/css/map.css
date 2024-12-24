@@ -1,41 +1,42 @@
-/* .place {
-  display: grid;
+.map-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  overflow: auto;
+}
+.place {
+  padding: 1rem;
+  height: 110px;
+  width: 110px;
+  display: flex;
   justify-content: center;
-  align-content: center;
-  width: 50px;
-  height: 50px;
-  padding: 1rem 0.75rem;
-  border-bottom: 3px solid rgba(111, 71, 255, 0.9);
-  box-shadow: 2px 2px 12px rgba(164, 138, 255, 0.2);
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid rgb(92, 92, 92);
+  background-color: var(--color-dark);
+  box-shadow: 3px 3px 3px rgba(99, 102, 255, 0.5);
 }
-
-.place p,
-.place h3 {
-  text-align: center;
-}
-.place p {
-  font-size: 0.65rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
 .place.active {
-  background-color: rgba(111, 71, 255, 0.9);
-  border-bottom: 3px solid rgba(71, 255, 80, 0.9);
+  background-color: var(--color-primary);
 }
 .place.visited {
-  background-color: rgba(164, 138, 255, 0.1);
+  background-color: var(--color-primary);
+  filter: brightness(0.5);
 }
-.place-type.enemy {
-  color: rgba(255, 114, 114, 0.9);
+
+.place-content > * {
+  color: var(--color-light);
+  text-align: center;
 }
-.place-type.empty {
-  color: rgba(226, 226, 226, 0.9);
+
+.place-content.enemy > * {
+  color: var(--color-danger);
 }
-.place-type.treasure {
-  color: rgba(255, 255, 126, 0.9);
+
+.place-content.treasure > * {
+  color: var(--color-secondary);
 }
-.place-type.boss {
-  color: rgba(255, 125, 255, 0.9);
-} */
+
+.place-content.boss > * {
+  color: var(--color-danger);
+}

@@ -63,7 +63,7 @@ export default function CardSimple({ item, mode }) {
   return (
     <div className="card-simple-container">
       <div
-        className={`card ${
+        className={`card card-character ${
           hero && mode === "hero" && hero.id === item.id ? "selected" : ""
         }`}
       >

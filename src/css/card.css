@@ -1,43 +1,44 @@
-.card-container {
-  width: 300px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  background-color: rgba(22, 22, 22, 0.945);
-  font-family: "Funnel Display", "Courier New", Courier, monospace;
-  align-self: flex-start;
-  padding: 3px;
-}
-
-.card {
-  max-width: 150px;
+.card,
+.card-back {
   border: 3px solid var(--color-light);
-  transition: transform 0.1s ease, box-shadow 0.3s ease;
+  transition: transform 0.01s ease, box-shadow 0.3s ease;
+  background-color: var(--color-dark);
+  width: 80px;
 }
 
+.card-character {
+  width: 140px;
+}
 .card.selected {
   border: 3px solid var(--color-primary);
+  transform: translateY(-12px);
 }
 .card.disabled {
   filter: grayscale(1);
   opacity: 0.5;
 }
-
-.card:hover {
+.card-animated:hover {
   cursor: pointer;
-  transform: translateY(-5px);
+  transform: translateY(-12px);
   box-shadow: 0 20px 30px rgba(111, 71, 255, 0.9);
 }
-.deck-grid {
+
+.deck-grid,
+.character-grid {
   display: flex;
   flex-direction: column;
+
+  height: 100%;
+  padding: 1rem;
+  background-color: #262c36;
 }
 .deck {
   flex: 1;
-  background-color: #262c36;
+  background-color: var(--color-dark-border);
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
+  padding: 1rem;
   justify-content: center;
   align-items: center;
 }

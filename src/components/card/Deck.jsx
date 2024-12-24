@@ -2,23 +2,31 @@ import { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 import cardBack from "../../assets/cards/bg1.jpg";
-import calculateSelectedCards from "./calculate";
+import { calculateSelectedCards, calculateHandRanking } from "./calculate";
+import { useGameContext } from "../../context/GameContext";
 
 export default function Deck({ cards, isFront = true }) {
-  const [selectedCards, setSelectedCards] = useState([]);
   const [canSelect, setCanSelect] = useState(true);
+  const [HRMessage, setHRMessage] = useState("");
+
+  const {
+    handRanking,
+    setHandRanking,
+    heroSelectedCards,
+    setHeroSelectedCards,
+  } = useGameContext();
 
   useEffect(() => {
-    if (selectedCards.length <= 3) {
+    if (heroSelectedCards.length <= 3) {
       setCanSelect(true);
     } else {
       setCanSelect(false);
     }
-  }, [selectedCards]);
+  }, [heroSelectedCards]);
 
   const handleSelectCard = (card) => {
-    if (!canSelect && !selectedCards.includes(card)) return;
-    setSelectedCards((prevSelectedCards) => {
+    if (!canSelect && !heroSelectedCards.includes(card)) return;
+    setHeroSelectedCards((prevSelectedCards) => {
       if (prevSelectedCards.includes(card)) {
         return prevSelectedCards.filter((_card) => _card !== card);
       } else {
@@ -28,18 +36,25 @@ export default function Deck({ cards, isFront = true }) {
   };
 
   useEffect(() => {
-    calculateSelectedCards(selectedCards);
-  }, [selectedCards]);
+    const _handRanking = calculateSelectedCards(heroSelectedCards);
+    setHandRanking(_handRanking);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [heroSelectedCards]);
+
+  useEffect(() => {
+    if (heroSelectedCards) calculateHandRanking(handRanking, setHRMessage);
+  }, [heroSelectedCards, handRanking, canSelect]);
 
   const loopForCards = () => {
     return cards.map((_card, i) => {
       return (
         <div key={i}>
           <div
-            className={`card ${
-              !canSelect && !selectedCards.includes(_card) ? "disabled" : ""
-            } ${selectedCards.includes(_card) ? "selected" : ""}`}
-            onClick={() => handleSelectCard(_card)}
+            className={`${isFront ? "card card-animated " : "card-back"} ${
+              !canSelect && !heroSelectedCards.includes(_card) ? "disabled" : ""
+            } ${heroSelectedCards.includes(_card) ? "selected" : ""}`}
+            onClick={isFront ? () => handleSelectCard(_card) : null}
           >
             <img
               src={isFront ? _card.src : cardBack}
@@ -59,7 +74,9 @@ export default function Deck({ cards, isFront = true }) {
                     : {}
                 }
               >
-                {_card.suit}#{_card.value}
+                <small>
+                  {_card.suit}#{_card.value}
+                </small>
               </span>
             </p>
           </div>
@@ -71,10 +88,12 @@ export default function Deck({ cards, isFront = true }) {
   if (cards && cards.length > 0)
     return (
       <>
-        <div className="deck ">{loopForCards()}</div>{" "}
-        <div className="center">
-          <span>Total: {100}</span>
-        </div>
+        <div className="deck ">{loopForCards()}</div>
+        {isFront && (
+          <div className="center bg-primary">
+            <h5>Hand Ranking: {HRMessage}</h5>
+          </div>
+        )}
       </>
     );
   else return <div>Deck is empty</div>;

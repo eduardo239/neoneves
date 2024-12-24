@@ -2,6 +2,8 @@ import hero1 from "../assets/heroes/h1.jpg";
 import hero2 from "../assets/heroes/h2.jpg";
 import hero3 from "../assets/heroes/h3.jpg";
 
+import { HERO } from "../helper/constant";
+
 export const heroesDB = [
   {
     name: "Louise",
@@ -11,7 +13,7 @@ export const heroesDB = [
     atk: 17,
     def: 30,
     special: 0,
-    type: "hero",
+    type: HERO,
   },
   {
     name: "Luna",
@@ -21,7 +23,7 @@ export const heroesDB = [
     atk: 12,
     def: 45,
     special: 0,
-    type: "hero",
+    type: HERO,
   },
   {
     name: "James",
@@ -31,6 +33,6 @@ export const heroesDB = [
     atk: 3,
     def: 2,
     special: 0,
-    type: "hero",
+    type: HERO,
   },
 ];

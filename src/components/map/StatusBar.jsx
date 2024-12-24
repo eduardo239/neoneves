@@ -1,4 +1,3 @@
-import { useGameContext } from "../../context/GameContext";
 import {
   GiBroadsword,
   GiCheckedShield,
@@ -8,37 +7,39 @@ import {
   GiPerson,
 } from "react-icons/gi";
 
-export default function StatusBar() {
-  const { hero } = useGameContext();
+import PropTypes from "prop-types";
 
-  if (hero)
+export default function StatusBar({ character }) {
+  if (character)
     return (
       <div className="status-grid">
         <span style={{ color: "#1BBA3B" }}>
           Name: <GiPerson />
-          {hero.name}
+          {character.name}
         </span>
         <span style={{ color: "#F03C4C" }}>
           HP:
-          <GiHealthPotion /> {hero.hp}
+          <GiHealthPotion /> {character.hp}
         </span>
         <span style={{ color: "#388CE0" }}>
           MP: <GiMagicPotion />
-          {hero.mp}
+          {character.mp}
         </span>
         <span style={{ color: "#F09624" }}>
           Attack: <GiBroadsword />
-          {hero.atk}
+          {character.atk}
         </span>
         <span style={{ color: "#884ED9" }}>
           Defense: <GiCheckedShield />
-          {hero.def}
+          {character.def}
         </span>
         <span style={{ color: "gold" }}>
           Gold: <GiGoldBar />
-          {hero.gold}
+          {character.gold}
         </span>
       </div>
     );
-  else return null;
 }
+StatusBar.propTypes = {
+  character: PropTypes.object.isRequired,
+};

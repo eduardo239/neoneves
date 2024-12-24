@@ -1,26 +1,26 @@
 import PropTypes from "prop-types";
 
-export default function CardFull({ h }) {
-  return (
-    <div className="card-container">
-      <div className={`card `}>
-        <img src={h.src} alt={h.name} />
+export default function CardFull({ character }) {
+  if (character?.type === "hero")
+    return (
+      <div className={`card card-character`}>
+        <img src={character.src} alt={character.name} />
         <p className="center">
-          <code>{h.name}</code>
+          <code>{character.name}</code>
         </p>
       </div>
-
-      <div className="card-stats">
-        <p>HP: {h.hp}</p>
-        <p>MP: {h.mp}</p>
-        <p>Attack: {h.atk}</p>
-        <p>Defense: {h.def}</p>
-        <p>Special: {h.special}</p>
+    );
+  else if (character?.type === "enemy")
+    return (
+      <div className={`card card-character`}>
+        <img src={character.src} alt={character.name} />
+        <p className="center">
+          <code>{character.name}</code>
+        </p>
       </div>
-    </div>
-  );
+    );
 }
 
 CardFull.propTypes = {
-  h: PropTypes.object.isRequired,
+  character: PropTypes.object.isRequired,
 };
