@@ -46,9 +46,9 @@ export default function Fighting() {
           </div>
           {hero && (
             <div className="flex gap-25 flex-column">
-              <code>LVL: 239</code>
-              <code>EXP: 1200</code>
-              <code>NXT: 239</code>
+              <code>LVL: {hero.level}</code>
+              <code>EXP: {hero.exp}</code>
+              <code>NXT: {hero.nextLevel}</code>
             </div>
           )}
         </div>

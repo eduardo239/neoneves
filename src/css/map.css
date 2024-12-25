@@ -3,6 +3,8 @@
   flex-wrap: wrap;
   gap: 0.25rem;
   overflow: auto;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 .place {
   padding: 1rem;

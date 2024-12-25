@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGameContext } from "../../context/GameContext";
+import Button from "./Button";
 
 export default function TopMenu() {
   const navigate = useNavigate();
@@ -8,9 +9,14 @@ export default function TopMenu() {
 
   return (
     <nav>
-      <button onClick={() => navigate("/")}>HOME</button>
-      <button onClick={() => navigate("/character")}>CHARACTER</button>
-      <button onClick={() => resetGame()}>Reset</button>
+      <Button primary onClick={() => navigate("/")} value="Home" />
+
+      <Button
+        primary
+        onClick={() => navigate("/character")}
+        value="Character"
+      />
+      <Button primary onClick={() => resetGame()} value="Reset" />
     </nav>
   );
 }

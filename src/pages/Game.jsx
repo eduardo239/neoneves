@@ -7,7 +7,7 @@ import { bossDB } from "../db/Boss";
 import StatusBar from "../components/map/StatusBar";
 
 import background from "../assets/bg/bg345.jpg";
-import TopMenu from "../components/ui/TopMenu";
+// import TopMenu from "../components/ui/TopMenu";
 import GameMain from "../components/ui/GameMain";
 import GameMainMenu from "../components/ui/GameMainMenu";
 import Message from "../components/ui/Message";
@@ -84,7 +84,7 @@ export default function Game() {
     >
       <Message />
       <div className="top">
-        <TopMenu />
+        {/* <TopMenu /> */}
 
         {hero && <StatusBar character={hero} />}
       </div>

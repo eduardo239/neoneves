@@ -1,6 +1,14 @@
+import { useState } from "react";
 import { useGameContext } from "../../context/GameContext";
 
+import Modal from "./Modal";
+import Button from "./Button";
+import HitLog from "../fight/HitLog";
+
 export default function GameFightMenu() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hitLog, setHitLog] = useState({});
+
   const {
     hero,
     enemy,
@@ -21,7 +29,7 @@ export default function GameFightMenu() {
   function getRandomCards(cardsArray) {
     // Verifica se o array possui elementos
     if (!Array.isArray(cardsArray) || cardsArray.length === 0) {
-      throw new Error("O array deve conter ao menos um elemento.");
+      return [];
     }
 
     // Gera um número aleatório entre 1 e o tamanho do array (ou 4, o que for menor)
@@ -46,7 +54,13 @@ export default function GameFightMenu() {
   }
 
   const hit = () => {
-    const _reduce = (acc, card) => acc + card.value;
+    setHitLog({
+      heroTotalValue: null,
+      enemyTotalValue: null,
+      handRanking: null,
+    });
+    setIsModalOpen(true);
+    const _reduce = (acc, item) => acc + item.value;
 
     // copy hero object
     const heroCopy = { ...hero };
@@ -59,12 +73,8 @@ export default function GameFightMenu() {
     let heroTotalValue = heroSelectedCards.reduce(_reduce, 0);
     let enemyTotalValue = enemyRandomCards.reduce(_reduce, 0);
 
-    console.log("hero total ", heroTotalValue);
-    console.log("enemy total", enemyTotalValue);
     // check hand rank
-
     const hasTrue = hasTrueValue(handRanking);
-    console.log("handranking ", hasTrue);
     //
     //TODO: add hand rank for enemy selected cards
     //
@@ -100,6 +110,12 @@ export default function GameFightMenu() {
 
     setEnemyCards(enemyCards.filter((c) => !enemyRandomCards.includes(c)));
     setEnemySelectedCards([]);
+
+    setHitLog({
+      heroTotalValue,
+      enemyTotalValue,
+      handRanking: hasTrueValue(handRanking) ? "true" : "false",
+    });
   };
 
   const magic = () => {
@@ -117,11 +133,14 @@ export default function GameFightMenu() {
   };
 
   return (
-    <div className="footer-buttons gap-25">
+    <div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <HitLog data={hitLog} />
+      </Modal>
       <div className="footer-buttons gap-25">
-        <button onClick={hit}>HIT</button>
-        <button onClick={magic}>MAGIC</button>
-        <button onClick={run}>RUN</button>
+        <Button primary onClick={hit} value="HIT" />
+        <Button primary onClick={magic} value="MAGIC" />
+        <Button primary onClick={run} value="RUN" />
       </div>
     </div>
   );

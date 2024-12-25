@@ -5,6 +5,8 @@ import "./css/helper.css";
 import "./css/text.css";
 import "./css/index.css";
 import "./css/grid.css";
+import "./css/button.css";
+import "./css/modal.css";
 import "./css/card.css";
 import "./css/map.css";
 import App from "./App.jsx";

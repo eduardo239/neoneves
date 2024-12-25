@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 import { useGameContext } from "../../context/GameContext";
 import { v4 as uuidv4 } from "uuid";
+import Button from "../ui/Button";
 
 export default function CardSimple({ item, mode }) {
   const { hero, setHero, inventory, setInventory, setIsTreasure, setMessage } =
@@ -77,29 +78,34 @@ export default function CardSimple({ item, mode }) {
           )}
         </div>
 
-        {mode === "hero" && (
-          <div className="card-footer">
-            <button onClick={() => handleSelectHero(item)}>Select</button>
-          </div>
-        )}
-        {mode === "use" && (
-          <div className="card-footer">
-            <button onClick={handleUse}>Use</button>
-          </div>
-        )}
-        {mode === "buy" && (
-          <div className="card-footer">
-            <h4 className="text-center secondary">${item.price}</h4>
+        <div className="card-footer">
+          {mode === "hero" && (
+            <Button
+              primary
+              full
+              onClick={() => handleSelectHero(item)}
+              value="Select"
+            />
+          )}
+          {mode === "use" && (
+            <Button primary full onClick={handleUse} value="Use" />
+          )}
+          {mode === "buy" && (
+            <>
+              <p className="item-price">${item.price}</p>
+              <Button primary full onClick={handleBuy} value="Buy" />
+            </>
+          )}
 
-            <button onClick={handleBuy}>Buy</button>
-          </div>
-        )}
-
-        {mode === "get" && (
-          <div className="card-footer">
-            <button onClick={() => handleGetitem(item)}>Get</button>
-          </div>
-        )}
+          {mode === "get" && (
+            <Button
+              primary
+              full
+              onClick={() => handleGetitem(item)}
+              value="Get"
+            />
+          )}
+        </div>
       </div>
     </div>
   );

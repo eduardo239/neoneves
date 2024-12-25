@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useGameContext } from "../../context/GameContext";
 import { generateRandomNumber } from "../../helper";
+import Button from "./Button";
 
 export default function GameMainMenu() {
+  const navigate = useNavigate();
+
   const {
     hero,
     isFighting,
@@ -15,6 +19,7 @@ export default function GameMainMenu() {
     setDice,
     setActualPlace,
     actualPlace,
+    resetGame,
   } = useGameContext();
 
   const openInventory = () => {
@@ -37,33 +42,37 @@ export default function GameMainMenu() {
     }, 1000);
   };
 
+  const disablePlayButton =
+    !hero || isFighting || isShopping || isTreasure || isInventory || isPlaying;
+  const disableInventoryButton = isTreasure || isShopping || !hero;
+  const disableStoreButton = isTreasure || isFighting || isInventory || !hero;
+
   return (
     <div className="footer-buttons gap-25">
-      <button
-        className={isPlaying ? "active" : ""}
+      <Button
+        primary
         onClick={play}
-        disabled={
-          !hero || isFighting || isShopping || isTreasure || isInventory
-        }
-      >
-        Play
-      </button>
+        value="Play"
+        disabled={disablePlayButton}
+      />
 
-      <button
-        className={isInventory ? "active" : ""}
-        disabled={isTreasure || !hero}
+      <Button
+        primary
         onClick={openInventory}
-      >
-        Inventory
-      </button>
+        value="Inventory"
+        disabled={disableInventoryButton}
+      />
 
-      <button
-        className={isShopping ? "active" : ""}
-        disabled={isTreasure || isFighting || !hero}
+      <Button
+        primary
         onClick={openStore}
-      >
-        Store
-      </button>
+        value="Store"
+        disabled={disableStoreButton}
+      />
+      <div> </div>
+
+      <Button primary onClick={() => navigate("/")} value="Home" />
+      <Button primary onClick={() => resetGame()} value="Reset" />
     </div>
   );
 }

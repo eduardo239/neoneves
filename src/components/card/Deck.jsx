@@ -60,19 +60,19 @@ export default function Deck({ cards, isFront = true }) {
               src={isFront ? _card.src : cardBack}
               alt="cards deck pick one"
             />
-            <p style={{ textAlign: "center" }}>
+            <p className="card-value">
               <span
-                style={
+                className={`${
                   _card.suit === "hearts"
-                    ? { color: "orange" }
+                    ? "hearts"
                     : _card.suit === "spades"
-                    ? { color: "yellow" }
+                    ? "spades"
                     : _card.suit === "diamonds"
-                    ? { color: "lightgreen" }
+                    ? "diamonds"
                     : _card.suit === "clubs"
-                    ? { color: "lightblue" }
-                    : {}
-                }
+                    ? "clubs"
+                    : ""
+                }`}
               >
                 <small>
                   {_card.suit}#{_card.value}

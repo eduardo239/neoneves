@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { heroesDB } from "../db/Hero.js";
 import { v4 as uuidv4 } from "uuid";
+import { useGameContext } from "../context/GameContext.jsx";
 
 import CardSimple from "../components/card/CardSimple.jsx";
 import StatusBar from "../components/map/StatusBar.jsx";
-import TopMenu from "../components/ui/TopMenu.jsx";
-import { useGameContext } from "../context/GameContext.jsx";
+// import TopMenu from "../components/ui/TopMenu.jsx";
+import Button from "../components/ui/Button.jsx";
 
 export default function Characters() {
   const { hero } = useGameContext();
@@ -25,9 +26,7 @@ export default function Characters() {
 
   return (
     <div className="container">
-      <div className="top">
-        <TopMenu />
-      </div>
+      <div className="top">{/* <TopMenu /> */}</div>
 
       <div className="middle">
         <div className="centered">
@@ -40,8 +39,8 @@ export default function Characters() {
         {hero && <StatusBar character={hero} />}
 
         <div className="footer-buttons">
-          <button onClick={() => navigate("/")}>Back</button>
-          <button onClick={() => navigate("/game")}>Next</button>
+          <Button primary onClick={() => navigate("/")} value="Back" />
+          <Button primary onClick={() => navigate("/game")} value="Next" />
         </div>
       </div>
     </div>
